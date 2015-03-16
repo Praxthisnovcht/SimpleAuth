@@ -230,36 +230,9 @@ class SimpleAuth extends PluginBase{
 					return true;
 				}
 				break;
-			case "register":
-				if($sender instanceof Player){
-					if($this->isPlayerRegistered($sender)){
-						$sender->sendMessage(TextFormat::RED . $this->getMessage("register.error.registered"));
-
-						return true;
-					}
-
-					$password = implode(" ", $args);
-					if(strlen($password) < $this->getConfig()->get("minPasswordLength")){
-						$sender->sendMessage($this->getMessage("register.error.password"));
-						return true;
-					}
-
-					if($this->registerPlayer($sender, $password) and $this->authenticatePlayer($sender)){
-						return true;
-					}else{
-						$sender->sendMessage(TextFormat::RED . $this->getMessage("register.error.general"));
-						return true;
-					}
-				}else{
-					$sender->sendMessage(TextFormat::RED . "This command only works in-game.");
-
-					return true;
-				}
-				break;
 		}
-
-		return false;
 	}
+			
 
 	private function parseMessages(array $messages){
 		$result = [];
